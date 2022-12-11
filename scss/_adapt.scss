@@ -1,0 +1,46 @@
+@mixin for_size($size) {
+    @if($size == phone){
+        @media (max-width: 570px){
+            @content;
+        }
+    }@else if($size == small-tablet){
+        @media (max-width: 770px){
+            @content;
+        }
+    }
+    @else if($size == tablet){
+        @media (max-width: 900px){
+            @content;
+        }
+    }
+    @else if($size == min-laptop){
+        @media (max-width: 1000px){
+            @content;
+        }
+    }
+    @else if($size == laptop){
+        @media (max-width: 1200px){
+            @content;
+        }
+    }
+}
+$ViewPort: 1200;
+$Min-ViewPort: 370;
+@mixin font-size($minSize, $maxSize, $inp: 'false') {
+    @media (min-width: 770px){
+        @if($inp == 'true'){
+            font-size: calc(#{$minSize + px} + #{($maxSize - $minSize)} * (100vw / #{$ViewPort})) !important;
+        }
+        @else if('false'){
+            font-size: calc(#{$minSize + px} + #{($maxSize - $minSize)} * (100vw / #{$ViewPort}));
+        }
+    }
+    @media (max-width: 770px){
+        @if($inp == 'true'){
+            font-size: calc(#{$minSize + px} + #{($maxSize - $minSize) + ($maxSize - $minSize * 0.7)} * ((100vw - #{$Min-ViewPort + px}) / #{$ViewPort})) !important;
+        }
+        @else if('false'){
+            font-size: calc(#{$minSize + px} + #{($maxSize - $minSize) + ($maxSize - $minSize * 0.7)} * ((100vw - #{$Min-ViewPort + px}) / #{$ViewPort}));
+        }
+    }
+}
