@@ -1,6 +1,7 @@
 <?php
 require_once './validation.php';
 require_once './db.php';
+require_once './baseMethods.php';
 class feedbackModel{
     private $params = null;
     function __construct($params){
@@ -23,13 +24,13 @@ class feedbackModel{
             if($data == 0)
                 throw new Exception("Incorrect data");
 
-            return $this->result([
+            return result([
                 'status' => 'ok',
                 'message' => 'Feedback is registered',
                 'id' => $data
             ] ,200);
         } catch (\Throwable $th) {
-            return $this->result([
+            return result([
                 'status' => 'false',
                 'message' => $th->getMessage()
             ] ,400);
@@ -37,8 +38,8 @@ class feedbackModel{
     }
 
 
-    private function result($data, $code){
-        http_response_code($code);
-        return json_encode($data);
-    }
+    // private function result($data, $code){
+    //     http_response_code($code);
+    //     return json_encode($data);
+    // }
 }
